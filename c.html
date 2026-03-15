@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>check risk</title>
+
+<style>
+
+*{box-sizing:border-box}
+
+body{
+font-family:Arial,sans-serif;
+background:url('images.jpeg') no-repeat center center/cover;
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+margin:0;
+}
+
+.overlay{
+position:absolute;
+inset:0;
+background:rgba(0,0,0,0.45);
+z-index:0;
+}
+
+.container{
+position:relative;
+z-index:1;
+background:rgba(255,255,255,0.95);
+padding:20px;
+border-radius:12px;
+box-shadow:0 4px 12px rgba(0,0,0,0.3);
+width:90%;
+max-width:320px;
+}
+
+h2{
+text-align:center;
+margin-bottom:15px;
+text-transform:capitalize;
+}
+
+label{
+display:block;
+margin:8px 0 4px;
+font-weight:bold;
+}
+
+input,select{
+width:100%;
+padding:8px;
+border:1px solid #ccc;
+border-radius:6px;
+font-size:16px;
+}
+
+button{
+margin-top:12px;
+width:100%;
+padding:10px;
+background:#2563eb;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+font-weight:bold;
+font-size:16px;
+}
+
+button:hover{
+background:#1d4ed8;
+}
+
+.result{
+margin-top:10px;
+background:#eef2ff;
+padding:10px;
+border-radius:6px;
+text-align:center;
+font-weight:bold;
+font-size:16px;
+}
+
+.credit{
+position:fixed;
+bottom:8px;
+right:12px;
+color:#fff;
+font-size:12px;
+opacity:0.8;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="overlay"></div>
+
+<div class="container">
+
+<h2>check risk</h2>
+
+<label>Select Coin</label>
+<select id="coin">
+<option value="bitcoin">Bitcoin</option>
+<option value="ethereum">Ethereum</option>
+<option value="solana">Solana</option>
+</select>
+
+<label>Lot size</label>
+<input type="number" id="a" placeholder="Enter lot size">
+
+<label>1 lot =</label>
+<input type="number" id="b" readonly>
+
+<label>StopLoss %*10</label>
+<input type="number" id="c" placeholder="Enter StopLoss %">
+
+<label>Coin Price ($)</label>
+<input type="number" id="d" readonly>
+
+<button onclick="calculate()">Check</button>
+
+<div class="result" id="result">Loss expected will appear here</div>
+
+</div>
+
+<div class="credit">Created by Farhan</div>
+
+<script>
+
+let selectedCoin="bitcoin";
+
+function setLotValue(){
+
+const coin=document.getElementById("coin").value;
+const lot=document.getElementById("b");
+
+if(coin==="bitcoin"){
+lot.value=0.001;
+}
+
+if(coin==="ethereum"){
+lot.value=0.01;
+}
+
+if(coin==="solana"){
+lot.value=1;
+}
+
+}
+
+async function getPrice(){
+
+const coin=document.getElementById("coin").value;
+
+try{
+
+const response=await fetch(
+"https://api.coingecko.com/api/v3/simple/price?ids="+coin+"&vs_currencies=usd"
+);
+
+const data=await response.json();
+
+document.getElementById("d").value=data[coin].usd;
+
+}catch(e){
+
+console.log("API error");
+
+}
+
+}
+
+document.getElementById("coin").addEventListener("change",function(){
+
+setLotValue();
+getPrice();
+
+});
+
+setLotValue();
+getPrice();
+
+setInterval(getPrice,5000);
+
+function calculate(){
+
+const a=parseFloat(document.getElementById('a').value);
+const b=parseFloat(document.getElementById('b').value);
+const c=parseFloat(document.getElementById('c').value);
+const d=parseFloat(document.getElementById('d').value);
+
+const resultBox=document.getElementById('result');
+
+if(isNaN(a)||isNaN(b)||isNaN(c)||isNaN(d)){
+
+resultBox.textContent='Please enter all values!';
+resultBox.style.color='red';
+return;
+
+}
+
+const result=(a*b*c*d)/11.76470588235294;
+
+resultBox.textContent='Loss expected: ₹'+result.toFixed(2);
+
+resultBox.style.color='black';
+
+}
+
+</script>
+
+</body>
+</html>

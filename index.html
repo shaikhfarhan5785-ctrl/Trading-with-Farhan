@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trading With Farhan</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+text-align:center;
+color:white;
+background-image:url("background.webp");
+background-size:cover;
+background-position:center;
+}
+
+/* header */
+
+.header{
+padding:40px;
+}
+
+.header h1{
+font-size:90px;
+color:yellow;
+margin-bottom:10px;
+text-shadow:0 0 15px orange;
+}
+
+/* grid layout */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:40px;
+padding:40px;
+max-width:1000px;
+margin:auto;
+}
+
+/* boxes */
+
+.box{
+text-decoration:none;
+color:white;
+font-size:22px;
+font-weight:bold;
+transition:0.3s;
+}
+
+.box img{
+width:200px;
+height:200px;
+border-radius:12px;
+transition:0.3s;
+box-shadow:0 0 10px black;
+}
+
+/* hover animation */
+
+.box:hover img{
+transform:scale(1.08);
+box-shadow:0 0 20px #00ffff;
+}
+
+.box p{
+margin-top:10px;
+}
+
+/* bottom buttons */
+
+.buttons{
+margin-top:30px;
+margin-bottom:50px;
+}
+
+.btn{
+display:inline-block;
+background:black;
+padding:15px 30px;
+margin:12px;
+color:white;
+text-decoration:none;
+font-size:18px;
+border-radius:8px;
+transition:0.3s;
+border:1px solid white;
+}
+
+.btn:hover{
+background:#00c3ff;
+color:black;
+box-shadow:0 0 15px #00c3ff;
+}
+
+/* mobile */
+
+@media(max-width:600px){
+
+.header h1{
+font-size:60px;
+}
+
+.box img{
+width:150px;
+height:150px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+<h1>T.W.F</h1>
+<h2>Trading With Farhan</h2>
+</div>
+
+<div class="grid">
+
+<a class="box" href="https://www.forexfactory.com/">
+<img src="crypto.jpeg">
+<p>Crypto News</p>
+</a>
+
+<a class="box" href="c.html">
+<img src="calculator.png">
+<p>SL Calculator</p>
+</a>
+
+<a class="box" href="p3.html">
+<img src="chart.jpg">
+<p>Charts</p>
+</a>
+
+<a class="box" href="strategy.html">
+<img src="strategy.jpeg">
+<p>Strategy</p>
+</a>
+
+<a class="box" href="mistakes.html">
+<img src="mistakes.png">
+<p>Mistake to Avoid</p>
+</a>
+
+</div>
+
+<div class="buttons">
+
+<a class="btn" href="https://youtube.com/@tradewithfarhan">YouTube Channel</a>
+
+<a class="btn" href="https://t.me/+ILAZivhdpApkN2M1">Telegram</a>
+
+<br>
+
+<a class="btn" href="https://chat.whatsapp.com/Hkxi7wykgSNAttzpu4ZHee">WhatsApp Group</a>
+
+</div>
+
+</body>
+</html>
